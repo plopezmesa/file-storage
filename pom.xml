@@ -13,11 +13,11 @@
 
   <properties>
     <!-- COMPILE VERSIONS -->
-    <java.version>1.8</java.version>
+    <java.version>1.6</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- 3rd parties -->
-    <commons-io.version>2.4</commons-io.version>
+    <commons-io.version>2.5</commons-io.version>
     <commons-lang.version>2.6</commons-lang.version>
 
     <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -34,11 +34,6 @@
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <version>${commons-io.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.scala-lang</groupId>
-      <artifactId>scala-library</artifactId>
-      <version>2.11.0</version>
     </dependency>
   </dependencies>
 
