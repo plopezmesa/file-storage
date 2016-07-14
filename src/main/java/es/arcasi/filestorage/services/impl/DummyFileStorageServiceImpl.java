@@ -4,6 +4,11 @@ import java.io.IOException;
 
 import es.arcasi.filestorage.model.FileStorageItem;
 
+/**
+ * Dummy file storage implementation. Only for testing purposes
+ * @author plopezmesa
+ *
+ */
 public class DummyFileStorageServiceImpl extends AbstractFileStorageService {
 
   @Override

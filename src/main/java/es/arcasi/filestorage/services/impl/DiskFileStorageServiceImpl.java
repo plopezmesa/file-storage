@@ -7,10 +7,24 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 
 import es.arcasi.filestorage.model.FileStorageItem;
+import es.arcasi.filestorage.services.FileStorageService;
 
+/**
+ * Disk (local path) file storage implementation
+ * @author plopezmesa
+ *
+ */
 public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
+  /**
+   * Base local path for file storage
+   */
   private String basePath;
-
+  
+  /**
+   * Creates a new disk {@link FileStorageService} implementations 
+   * @param basePath The base path is required to create a {@link DiskFileStorageServiceImpl} instance
+   * @throws IOException
+   */
   public DiskFileStorageServiceImpl(String basePath) throws IOException {
     setBasePath(basePath);
   }

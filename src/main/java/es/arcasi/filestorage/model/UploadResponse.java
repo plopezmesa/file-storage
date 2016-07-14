@@ -1,7 +1,18 @@
 package es.arcasi.filestorage.model;
 
+/**
+ * Response returned by upload service with the unique fileID identifying the file uploaded 
+ * @author plopezmesa
+ *
+ */
 public class UploadResponse {
+  /*
+   * Unique file ID identifying the uploaded resource
+   */
   private String fileId;
+  /**
+   * File metatada of the uploaded resource
+   */
   private FileMetadata fileMetadata;
 
   public UploadResponse(String fileId, FileMetadata fileMetadata) {

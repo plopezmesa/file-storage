@@ -1,5 +1,10 @@
 package es.arcasi.filestorage.model;
 
+/**
+ * Item to be stored and retrieved. This item consists of the byte array and the file metadata
+ * @author plopezmesa
+ *
+ */
 public class FileStorageItem {
   private byte [] file;
   private FileMetadata fileMetadata;

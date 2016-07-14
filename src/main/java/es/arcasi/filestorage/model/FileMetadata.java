@@ -1,5 +1,10 @@
 package es.arcasi.filestorage.model;
 
+/**
+ * File Metadata information to be saved and retrieved along with file bytes
+ * @author plopezmesa
+ *
+ */
 public class FileMetadata {
   private String name;
   private String extension;
