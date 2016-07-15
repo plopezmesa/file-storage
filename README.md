@@ -1,5 +1,6 @@
 # File Storage
 [![Build Status](https://travis-ci.org/plopezmesa/file-storage.svg?branch=master)](https://travis-ci.org/plopezmesa/file-storage)
+[![Coverage Status](https://coveralls.io/repos/github/plopezmesa/file-storage/badge.svg?branch=master)](https://coveralls.io/github/plopezmesa/file-storage?branch=master)
 [![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 A File Storage library to store files in memory or local paths
