@@ -57,7 +57,7 @@ public class AbstractFileStorageServiceImplTest {
   }
 
   @Test
-  public final void get_file_with_existing_fileId_returns_metadata_null_when_no_metadata() throws IOException {
+  public final void get_file_with_existing_fileId_returns_null_metadata_when_no_metadata() throws IOException {
     String fileId = fileStorageService.save(new FileStorageItem(fileData));
 
     FileStorageItem fileStorageItem = fileStorageService.get(fileId);
@@ -66,7 +66,7 @@ public class AbstractFileStorageServiceImplTest {
   }
 
   @Test
-  public final void get_file_with_existing_fileId_returns_same_metadata_null_when_file_has_metadata() throws IOException {
+  public final void get_file_with_existing_fileId_returns_same_metadata_when_file_has_metadata() throws IOException {
     String fileId = fileStorageService.save(new FileStorageItem(fileData, fileMetadata));
 
     FileStorageItem fileStorageItem = fileStorageService.get(fileId);
