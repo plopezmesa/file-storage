@@ -90,5 +90,28 @@ public class DiskFileStorageServiceImplTest {
     Assert.assertNotNull(fileStorageItem);
     Assert.assertArrayEquals(fileData, fileStorageItem.getFile());
   }
+  
+  @Test
+  public final void get_file_with_existing_fileId_returns_metadata_null_when_no_metadata() throws IOException {
+    FileStorageService fileStorageService = new DiskFileStorageServiceImpl(BASE_PATH);
+    String fileId = fileStorageService.save(new FileStorageItem(fileData));
+    
+    FileStorageItem fileStorageItem = fileStorageService.get(fileId);
+    
+    Assert.assertNull(fileStorageItem.getFileMetadata());
+  }
+  
+  @Test
+  public final void get_file_with_existing_fileId_returns_same_metadata_null_when_file_has_metadata() throws IOException {
+    FileStorageService fileStorageService = new DiskFileStorageServiceImpl(BASE_PATH);
+    String fileId = fileStorageService.save(new FileStorageItem(fileData, fileMetadata));
+    
+    FileStorageItem fileStorageItem = fileStorageService.get(fileId);
+    
+    Assert.assertNotNull(fileStorageItem.getFileMetadata());
+    Assert.assertEquals(fileMetadata.getName(), fileStorageItem.getFileMetadata().getName());
+    Assert.assertEquals(fileMetadata.getExtension(), fileStorageItem.getFileMetadata().getExtension());
+    Assert.assertEquals(fileMetadata.getMimeType(), fileStorageItem.getFileMetadata().getMimeType());
+  }
 
 }
