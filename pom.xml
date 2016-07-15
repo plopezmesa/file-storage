@@ -89,6 +89,12 @@
           </execution>
         </executions>
       </plugin>
+      <!-- Cobertura -->
+      <plugin>
+        <groupId>org.eluder.coveralls</groupId>
+        <artifactId>coveralls-maven-plugin</artifactId>
+        <version>4.2.0</version>
+      </plugin>
 
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
