@@ -8,13 +8,13 @@ import net.jodah.expiringmap.ExpiringMap;
 
 /**
  * Memory file storage implementation
- * A Map with a defined timeout (TTL) for its entries. Bases on {@link ExpiringMap} library
+ * A Map with a defined timeout (TTL) in seconds for its entries. Bases on {@link ExpiringMap} library
  * @author plopezmesa
  *
  */
 public class MemoryFileStorageServiceImpl extends AbstractFileStorageService {
   /**
-   * Default TTL is set to 600
+   * Default TTL is set to 600 sg
    */
   private final static long DEFAULT_TTL = 600L;
   /**

@@ -69,9 +69,13 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
   }
 
   @Override
-  public FileStorageItem get(String fileId) throws IOException {
-    FileStorageItem fileStorageItem = new FileStorageItem(getFile(fileId), getFileMetadata(fileId));
-    return fileStorageItem;
+  public FileStorageItem get(String fileId) {
+    try {
+      FileStorageItem fileStorageItem = new FileStorageItem(getFile(fileId), getFileMetadata(fileId));
+      return fileStorageItem;
+    } catch (Exception e) {
+      return null;
+    }
   }
 
   private byte[] getFile(String fileId) throws IOException {
