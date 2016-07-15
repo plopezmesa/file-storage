@@ -20,6 +20,7 @@
     <commons-io.version>2.5</commons-io.version>
     <commons-lang.version>2.6</commons-lang.version>
     <net.jodah.expiringmap.version>0.5.6</net.jodah.expiringmap.version>
+    <junit.version>4.12</junit.version>
 
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -71,6 +72,14 @@
       <artifactId>expiringmap</artifactId>
       <version>${net.jodah.expiringmap.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 
   <build>

@@ -54,8 +54,22 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
   }
 
   private void setBasePath(String basePath) throws IOException {
-    if (basePath == null || !new File(basePath).exists()) {
+    if (basePath == null) {
+      throw new IllegalArgumentException("BasePath cannot be null");
+    }
+    
+    if (!basePath.endsWith(File.separator)) {
+      basePath += File.separator;
+    }
+    
+    File basePathFile = new File(basePath);
+    
+    if (!basePathFile.exists()) {
       throw new FileNotFoundException();
+    }
+    
+    if (!basePathFile.isDirectory() || !basePathFile.canRead() || !basePathFile.canWrite()) {
+      throw new IllegalArgumentException("BasePath must be a directory with read and write permissions");
     }
 
     this.basePath = basePath;
