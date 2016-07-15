@@ -1,4 +1,4 @@
-package es.arcasi.filestorage.model;
+package es.arcasi.oss.filestorage.model;
 
 /**
  * File Metadata information to be saved and retrieved along with file bytes

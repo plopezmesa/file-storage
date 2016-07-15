@@ -1,4 +1,4 @@
-package es.arcasi.filestorage.services;
+package es.arcasi.oss.filestorage.services;
 
 /**
  * File ID Generator

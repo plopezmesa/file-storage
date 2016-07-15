@@ -1,4 +1,4 @@
-package es.arcasi.filestorage.model;
+package es.arcasi.oss.filestorage.model;
 
 /**
  * Item to be stored and retrieved. This item consists of the byte array and the file metadata

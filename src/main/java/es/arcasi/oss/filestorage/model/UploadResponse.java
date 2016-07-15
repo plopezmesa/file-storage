@@ -1,4 +1,4 @@
-package es.arcasi.filestorage.model;
+package es.arcasi.oss.filestorage.model;
 
 /**
  * Response returned by upload service with the unique fileID identifying the file uploaded 

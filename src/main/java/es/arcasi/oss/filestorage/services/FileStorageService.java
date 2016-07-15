@@ -1,8 +1,8 @@
-package es.arcasi.filestorage.services;
+package es.arcasi.oss.filestorage.services;
 
 import java.io.IOException;
 
-import es.arcasi.filestorage.model.FileStorageItem;
+import es.arcasi.oss.filestorage.model.FileStorageItem;
 
 /**
  * Service to save (store) and retrieve {@linkplain FileStorageItem} files

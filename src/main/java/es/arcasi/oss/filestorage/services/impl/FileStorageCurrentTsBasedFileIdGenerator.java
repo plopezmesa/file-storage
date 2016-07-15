@@ -1,8 +1,8 @@
-package es.arcasi.filestorage.services.impl;
+package es.arcasi.oss.filestorage.services.impl;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-import es.arcasi.filestorage.services.FileStorageFileIdGenerator;
+import es.arcasi.oss.filestorage.services.FileStorageFileIdGenerator;
 
 /**
  * {@linkplain FileStorageFileIdGenerator} implementation

@@ -1,8 +1,8 @@
-package es.arcasi.filestorage.services.impl;
+package es.arcasi.oss.filestorage.services.impl;
 
 import java.io.IOException;
 
-import es.arcasi.filestorage.model.FileStorageItem;
+import es.arcasi.oss.filestorage.model.FileStorageItem;
 
 /**
  * Dummy file storage implementation. Only for testing purposes

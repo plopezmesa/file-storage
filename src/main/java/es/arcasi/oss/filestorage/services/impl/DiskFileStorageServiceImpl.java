@@ -1,4 +1,4 @@
-package es.arcasi.filestorage.services.impl;
+package es.arcasi.oss.filestorage.services.impl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,8 +6,8 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 
-import es.arcasi.filestorage.model.FileStorageItem;
-import es.arcasi.filestorage.services.FileStorageService;
+import es.arcasi.oss.filestorage.model.FileStorageItem;
+import es.arcasi.oss.filestorage.services.FileStorageService;
 
 /**
  * Disk (local path) file storage implementation

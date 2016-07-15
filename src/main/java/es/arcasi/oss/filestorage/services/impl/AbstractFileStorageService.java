@@ -1,7 +1,7 @@
-package es.arcasi.filestorage.services.impl;
+package es.arcasi.oss.filestorage.services.impl;
 
-import es.arcasi.filestorage.services.FileStorageFileIdGenerator;
-import es.arcasi.filestorage.services.FileStorageService;
+import es.arcasi.oss.filestorage.services.FileStorageFileIdGenerator;
+import es.arcasi.oss.filestorage.services.FileStorageService;
 
 /**
  * Abstract base class for {@link FileStorageService} implementations

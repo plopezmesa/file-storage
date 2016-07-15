@@ -1,9 +1,9 @@
-package es.arcasi.filestorage.services.impl;
+package es.arcasi.oss.filestorage.services.impl;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import es.arcasi.filestorage.model.FileStorageItem;
+import es.arcasi.oss.filestorage.model.FileStorageItem;
 import net.jodah.expiringmap.ExpiringMap;
 
 /**
