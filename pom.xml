@@ -41,7 +41,7 @@
 
   <scm>
     <connection>scm:git:git@github.com:plopezmesa/file-storage.git</connection>
-    <developerConnection>scm:git:ssh@github.com:plopezmesa/file-storage.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:plopezmesa/file-storage.git</developerConnection>
     <url>http://github.com/plopezmesa/file-storage/tree/master</url>
   </scm>
 
