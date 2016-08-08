@@ -9,6 +9,8 @@
 
   <name>FileStorage</name>
   <description>File Storage Services</description>
+  <url>http://github.com/plopezmesa/file-storage/tree/master</url>
+  
 
   <properties>
     <!-- COMPILE VERSIONS -->
@@ -35,6 +37,7 @@
   <developers>
     <developer>
       <name>Pablo López Mesa</name>
+      <organizationUrl>https://github.com/plopezmesa/</organizationUrl>
     </developer>
   </developers>
 
