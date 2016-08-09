@@ -36,6 +36,28 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
   public DiskFileStorageServiceImpl(String basePath) throws IOException {
     setBasePath(basePath);
   }
+  
+  private void setBasePath(String basePath) throws IOException {
+    if (basePath == null) {
+      throw new IllegalArgumentException("BasePath cannot be null");
+    }
+
+    if (!basePath.endsWith(File.separator)) {
+      basePath += File.separator;
+    }
+
+    File basePathFile = new File(basePath);
+
+    if (!basePathFile.exists()) {
+      throw new FileNotFoundException();
+    }
+
+    if (!basePathFile.isDirectory() || !basePathFile.canRead() || !basePathFile.canWrite()) {
+      throw new IllegalArgumentException("BasePath must be a directory with read and write permissions");
+    }
+
+    this.basePath = basePath;
+  }
 
   private File getFilePath(String fileId) {
     String filePath = basePath + fileId;
@@ -98,27 +120,11 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
 
     return fileMetadata;
   }
-
-  private void setBasePath(String basePath) throws IOException {
-    if (basePath == null) {
-      throw new IllegalArgumentException("BasePath cannot be null");
-    }
-
-    if (!basePath.endsWith(File.separator)) {
-      basePath += File.separator;
-    }
-
-    File basePathFile = new File(basePath);
-
-    if (!basePathFile.exists()) {
-      throw new FileNotFoundException();
-    }
-
-    if (!basePathFile.isDirectory() || !basePathFile.canRead() || !basePathFile.canWrite()) {
-      throw new IllegalArgumentException("BasePath must be a directory with read and write permissions");
-    }
-
-    this.basePath = basePath;
+  
+  @Override
+  public boolean delete(String fileId) {
+    File savedFile = getFilePath(fileId);
+    return FileUtils.deleteQuietly(savedFile);
   }
 
 }

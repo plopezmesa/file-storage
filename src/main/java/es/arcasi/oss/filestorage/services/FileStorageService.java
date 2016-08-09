@@ -26,4 +26,11 @@ public interface FileStorageService {
    * @throws IOException
    */
   public FileStorageItem get (String fileId) throws IOException;
+  
+  /**
+   * Deletes the {@linkplain FileStorageItem} file identified by the given fileId
+   * @param fileId Unique file ID
+   * @return true whenever a file is deleted
+   */
+  public boolean delete (String fileId);
 }

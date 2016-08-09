@@ -76,5 +76,26 @@ public class AbstractFileStorageServiceImplTest {
     Assert.assertEquals(fileMetadata.getExtension(), fileStorageItem.getFileMetadata().getExtension());
     Assert.assertEquals(fileMetadata.getMimeType(), fileStorageItem.getFileMetadata().getMimeType());
   }
+  
+  @Test
+  public final void delete_unexisting_file_returns_false () throws IOException {
+    Assert.assertFalse(fileStorageService.delete(FILEID_UNKNOWN));
+  }
+  
+  @Test
+  public final void delete_existing_file_returns_true () throws IOException {
+    String fileId = fileStorageService.save(new FileStorageItem(fileData));
+
+    Assert.assertTrue(fileStorageService.delete(fileId));
+  }
+  
+  @Test
+  public final void delete_existing_file_must_return_null_when_getting_it_again () throws IOException {
+    String fileId = fileStorageService.save(new FileStorageItem(fileData));
+
+    fileStorageService.delete(fileId);
+    
+    Assert.assertNull(fileStorageService.get(fileId));
+  }
 
 }

@@ -52,4 +52,9 @@ public class MemoryFileStorageServiceImpl extends AbstractFileStorageService {
     return fileStorageItem;
   }
 
+  @Override
+  public boolean delete(String fileId) {
+    return mapCache.remove(fileId) != null;
+  }
+
 }
