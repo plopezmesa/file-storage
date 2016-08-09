@@ -123,8 +123,9 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
   
   @Override
   public boolean delete(String fileId) {
-    File savedFile = getFilePath(fileId);
-    return FileUtils.deleteQuietly(savedFile);
+    boolean deleted = FileUtils.deleteQuietly(getFilePath(fileId));
+    FileUtils.deleteQuietly(getFileMetadataPath(fileId));
+    return deleted;
   }
 
 }
