@@ -4,7 +4,7 @@
 
   <groupId>es.arcasi.oss</groupId>
   <artifactId>file-storage</artifactId>
-  <version>0.01.002-SNAPSHOT</version>
+  <version>0.02.001</version>
   <packaging>jar</packaging>
 
   <name>FileStorage</name>
@@ -45,7 +45,7 @@
     <connection>scm:git:git@github.com:plopezmesa/file-storage.git</connection>
     <developerConnection>scm:git:git@github.com:plopezmesa/file-storage.git</developerConnection>
     <url>http://github.com/plopezmesa/file-storage/tree/master</url>
-    <tag>HEAD</tag>
+    <tag>0.02.001</tag>
   </scm>
 
   <distributionManagement>
