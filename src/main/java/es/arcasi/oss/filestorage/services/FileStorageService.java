@@ -11,26 +11,32 @@ import es.arcasi.oss.filestorage.model.FileStorageItem;
  *
  */
 public interface FileStorageService {
+
+  /**
+   * FileMetadata will be written with the same filename as the file but with this METADATA_FILE_EXT extension added
+   */
+  public static final String METADATA_FILE_EXT = ".fsm";
+
   /**
    * Stores (saves) the {@linkplain FileStorageItem} file
    * @param fileStorageItem
    * @return The file ID needed to retrieve the {@linkplain FileStorageItem} file
    * @throws IOException
    */
-  public String save (FileStorageItem fileStorageItem) throws IOException;
-  
+  public String save(FileStorageItem fileStorageItem) throws IOException;
+
   /**
    * Retrieves the {@linkplain FileStorageItem} file identified by the given fileId
    * @param fileId Unique file ID
    * @return The {@linkplain FileStorageItem} file identified by the given fileId
    * @throws IOException
    */
-  public FileStorageItem get (String fileId) throws IOException;
-  
+  public FileStorageItem get(String fileId) throws IOException;
+
   /**
    * Deletes the {@linkplain FileStorageItem} file identified by the given fileId
    * @param fileId Unique file ID
    * @return true whenever a file is deleted
    */
-  public boolean delete (String fileId);
+  public boolean delete(String fileId);
 }

@@ -19,11 +19,6 @@ import es.arcasi.oss.filestorage.services.FileStorageService;
 public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
 
   /**
-   * FileMetadata will be written with the same filename as the file but with this METADATA_FILE_EXT extension added
-   */
-  private static final String METADATA_FILE_EXT = ".fsm";
-
-  /**
    * Base local path for file storage
    */
   private String basePath;
@@ -36,7 +31,7 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
   public DiskFileStorageServiceImpl(String basePath) throws IOException {
     setBasePath(basePath);
   }
-  
+
   private void setBasePath(String basePath) throws IOException {
     if (basePath == null) {
       throw new IllegalArgumentException("BasePath cannot be null");
@@ -95,7 +90,8 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
     try {
       FileStorageItem fileStorageItem = new FileStorageItem(getFile(fileId), getFileMetadata(fileId));
       return fileStorageItem;
-    } catch (Exception e) {
+    }
+    catch (Exception e) {
       return null;
     }
   }
@@ -120,7 +116,7 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
 
     return fileMetadata;
   }
-  
+
   @Override
   public boolean delete(String fileId) {
     boolean deleted = FileUtils.deleteQuietly(getFilePath(fileId));
