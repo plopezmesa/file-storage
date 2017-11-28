@@ -2,6 +2,7 @@ package es.arcasi.oss.filestorage.services;
 
 import java.io.IOException;
 
+import es.arcasi.oss.filestorage.model.FileMetadata;
 import es.arcasi.oss.filestorage.model.FileStorageItem;
 
 /**
@@ -32,6 +33,14 @@ public interface FileStorageService {
    * @throws IOException
    */
   public FileStorageItem get(String fileId) throws IOException;
+
+  /**
+   * Retrieves the {@linkplain FileMetadata} from {@link FileStorageItem} identified by the given fileId
+   * @param fileId Unique file ID
+   * @return The {@linkplain FileMetadata} from {@link FileStorageItem} identified by the given fileId
+   * @throws IOException
+   */
+  public FileMetadata getMetadata(String fileId) throws IOException;
 
   /**
    * Deletes the {@linkplain FileStorageItem} file identified by the given fileId

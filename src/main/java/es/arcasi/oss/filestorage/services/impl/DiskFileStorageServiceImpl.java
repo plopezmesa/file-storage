@@ -5,7 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.SerializationUtils;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import es.arcasi.oss.filestorage.model.FileMetadata;
 import es.arcasi.oss.filestorage.model.FileStorageItem;
@@ -22,6 +23,11 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
    * Base local path for file storage
    */
   private String basePath;
+
+  /**
+   * Jackson JSON Serialization
+   */
+  private ObjectMapper objectMapper = new ObjectMapper();
 
   /**
    * Creates a new disk {@link FileStorageService} implementations
@@ -82,7 +88,7 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
 
   private void saveMetadata(FileMetadata fileMetadata, String fileId) throws IOException {
     File savedFile = getFileMetadataPath(fileId);
-    FileUtils.writeByteArrayToFile(savedFile, SerializationUtils.serialize(fileMetadata));
+    objectMapper.writeValue(savedFile, fileMetadata);
   }
 
   @Override
@@ -94,6 +100,11 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
     catch (Exception e) {
       return null;
     }
+  }
+
+  @Override
+  public FileMetadata getMetadata(String fileId) throws IOException {
+    return getFileMetadata(fileId);
   }
 
   private byte[] getFile(String fileId) throws IOException {
@@ -111,7 +122,7 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
 
     FileMetadata fileMetadata = null;
     if (savedFile.exists()) {
-      fileMetadata = (FileMetadata) SerializationUtils.deserialize(FileUtils.readFileToByteArray(savedFile));
+      fileMetadata = objectMapper.readValue(savedFile, FileMetadata.class);
     }
 
     return fileMetadata;

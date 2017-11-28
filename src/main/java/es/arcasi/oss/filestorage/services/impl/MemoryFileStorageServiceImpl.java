@@ -1,8 +1,10 @@
 package es.arcasi.oss.filestorage.services.impl;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import es.arcasi.oss.filestorage.model.FileMetadata;
 import es.arcasi.oss.filestorage.model.FileStorageItem;
 import net.jodah.expiringmap.ExpiringMap;
 
@@ -50,6 +52,17 @@ public class MemoryFileStorageServiceImpl extends AbstractFileStorageService {
   public FileStorageItem get(String fileId) {
     FileStorageItem fileStorageItem = mapCache.get(fileId);
     return fileStorageItem;
+  }
+
+  @Override
+  public FileMetadata getMetadata(String fileId) throws IOException {
+    FileStorageItem fileStorageItem = mapCache.get(fileId);
+
+    FileMetadata fileMetadata = null;
+    if (fileStorageItem != null) {
+      fileMetadata = fileStorageItem.getFileMetadata();
+    }
+    return fileMetadata;
   }
 
   @Override

@@ -25,9 +25,12 @@ public class AbstractFileStorageServiceImplTest {
     fileData = "FILE DATA".getBytes();
 
     fileMetadata = new FileMetadata();
-    fileMetadata.setName("NAME");
-    fileMetadata.setExtension("EXT");
-    fileMetadata.setMimeType("MIME");
+    fileMetadata.setFileName("NAME");
+    fileMetadata.setFileSize(1024L);
+    fileMetadata.setContentType("MIME");
+
+    fileMetadata.getMetadata().put("key1", "value1");
+    fileMetadata.getMetadata().put("key2", "value2");
   }
 
   public AbstractFileStorageServiceImplTest(FileStorageService fileStorageService) {
@@ -72,29 +75,55 @@ public class AbstractFileStorageServiceImplTest {
     FileStorageItem fileStorageItem = fileStorageService.get(fileId);
 
     Assert.assertNotNull(fileStorageItem.getFileMetadata());
-    Assert.assertEquals(fileMetadata.getName(), fileStorageItem.getFileMetadata().getName());
-    Assert.assertEquals(fileMetadata.getExtension(), fileStorageItem.getFileMetadata().getExtension());
-    Assert.assertEquals(fileMetadata.getMimeType(), fileStorageItem.getFileMetadata().getMimeType());
+    Assert.assertEquals(fileMetadata.getFileName(), fileStorageItem.getFileMetadata().getFileName());
+    Assert.assertEquals(fileMetadata.getFileSize(), fileStorageItem.getFileMetadata().getFileSize());
+    Assert.assertEquals(fileMetadata.getContentType(), fileStorageItem.getFileMetadata().getContentType());
+    Assert.assertEquals(fileMetadata.getMetadata(), fileStorageItem.getFileMetadata().getMetadata());
   }
-  
+
   @Test
-  public final void delete_unexisting_file_returns_false () throws IOException {
+  public final void get_metadata_with_unknown_fileId_must_return_null() throws IOException {
+    Assert.assertNull(fileStorageService.getMetadata(FILEID_UNKNOWN));
+  }
+
+  @Test
+  public final void get_metadata_with_existing_fileId_returns_same_metadata_when_file_has_metadata() throws IOException {
+    String fileId = fileStorageService.save(new FileStorageItem(fileData, fileMetadata));
+
+    FileMetadata fileStorageMetadata = fileStorageService.getMetadata(fileId);
+
+    Assert.assertNotNull(fileStorageMetadata);
+    Assert.assertEquals(fileMetadata.getFileName(), fileStorageMetadata.getFileName());
+    Assert.assertEquals(fileMetadata.getFileSize(), fileStorageMetadata.getFileSize());
+    Assert.assertEquals(fileMetadata.getContentType(), fileStorageMetadata.getContentType());
+    Assert.assertEquals(fileMetadata.getMetadata(), fileStorageMetadata.getMetadata());
+  }
+
+  @Test
+  public final void get_metadata_with_existing_fileId_returns_null_metadata_when_no_metadata() throws IOException {
+    String fileId = fileStorageService.save(new FileStorageItem(fileData));
+
+    Assert.assertNull(fileStorageService.getMetadata(fileId));
+  }
+
+  @Test
+  public final void delete_unexisting_file_returns_false() throws IOException {
     Assert.assertFalse(fileStorageService.delete(FILEID_UNKNOWN));
   }
-  
+
   @Test
-  public final void delete_existing_file_returns_true () throws IOException {
+  public final void delete_existing_file_returns_true() throws IOException {
     String fileId = fileStorageService.save(new FileStorageItem(fileData));
 
     Assert.assertTrue(fileStorageService.delete(fileId));
   }
-  
+
   @Test
-  public final void delete_existing_file_must_return_null_when_getting_it_again () throws IOException {
+  public final void delete_existing_file_must_return_null_when_getting_it_again() throws IOException {
     String fileId = fileStorageService.save(new FileStorageItem(fileData));
 
     fileStorageService.delete(fileId);
-    
+
     Assert.assertNull(fileStorageService.get(fileId));
   }
 

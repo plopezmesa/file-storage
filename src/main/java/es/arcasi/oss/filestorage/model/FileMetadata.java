@@ -1,6 +1,8 @@
 package es.arcasi.oss.filestorage.model;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * File Metadata information to be saved and retrieved along with file bytes
@@ -10,31 +12,42 @@ import java.io.Serializable;
 public class FileMetadata implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  private String name;
-  private String extension;
-  private String mimeType;
+  private static final String FILENAME_KEY = "_FILENAME";
+  private static final String FILESIZE_KEY = "_FILESIZE";
+  private static final String CONTENT_TYPE_KEY = "_CONTENT_TYPE";
 
-  public String getName() {
-    return name;
+  protected Map<String, String> metadata = new HashMap<>();
+
+  public String getFileName() {
+    return metadata.get(FILENAME_KEY);
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setFileName(String fileName) {
+    metadata.put(FILENAME_KEY, fileName);
   }
 
-  public String getExtension() {
-    return extension;
+  public String getContentType() {
+    return metadata.get(CONTENT_TYPE_KEY);
   }
 
-  public void setExtension(String extension) {
-    this.extension = extension;
+  public void setContentType(String contentType) {
+    metadata.put(CONTENT_TYPE_KEY, contentType);
   }
 
-  public String getMimeType() {
-    return mimeType;
+  public Long getFileSize() {
+    return Long.valueOf(metadata.get(FILESIZE_KEY));
   }
 
-  public void setMimeType(String mimeType) {
-    this.mimeType = mimeType;
+  public void setFileSize(Long fileSize) {
+    metadata.put(FILESIZE_KEY, String.valueOf(fileSize));
   }
+
+  public Map<String, String> getMetadata() {
+    return metadata;
+  }
+
+  public void setMetadata(Map<String, String> metadata) {
+    this.metadata = metadata;
+  }
+
 }
