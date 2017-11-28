@@ -42,24 +42,6 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
     setBasePath(basePath);
   }
 
-  @Override
-  public Collection<String> keys() throws IOException {
-    File basePathDir = new File(basePath);
-
-    File[] files = basePathDir.listFiles(new FilenameFilter() {
-      public boolean accept(File dir, String name) {
-        return !name.endsWith(METADATA_FILE_EXT);
-      }
-    });
-
-    Collection<String> fileIds = new ArrayList<>(files.length);
-    for (File file : files) {
-      fileIds.add(file.getName());
-    }
-
-    return fileIds;
-  }
-
   private void setBasePath(String basePath) throws IOException {
     if (basePath == null) {
       throw new IllegalArgumentException("BasePath cannot be null");
@@ -92,6 +74,24 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
     String fileMetadataPath = basePath + fileId + METADATA_FILE_EXT;
     File savedFile = new File(fileMetadataPath);
     return savedFile;
+  }
+
+  @Override
+  public Collection<String> keys() throws IOException {
+    File basePathDir = new File(basePath);
+
+    File[] files = basePathDir.listFiles(new FilenameFilter() {
+      public boolean accept(File dir, String name) {
+        return !name.endsWith(METADATA_FILE_EXT);
+      }
+    });
+
+    Collection<String> fileIds = new ArrayList<>(files.length);
+    for (File file : files) {
+      fileIds.add(file.getName());
+    }
+
+    return fileIds;
   }
 
   @Override
