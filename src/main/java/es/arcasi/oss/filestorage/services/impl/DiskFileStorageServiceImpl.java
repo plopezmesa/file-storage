@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -130,6 +131,11 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
 
   @Override
   public boolean delete(String fileId) {
+
+    if (StringUtils.isBlank(fileId)) {
+      throw new IllegalArgumentException("fileId cannot be blank");
+    }
+
     boolean deleted = FileUtils.deleteQuietly(getFilePath(fileId));
     FileUtils.deleteQuietly(getFileMetadataPath(fileId));
     return deleted;

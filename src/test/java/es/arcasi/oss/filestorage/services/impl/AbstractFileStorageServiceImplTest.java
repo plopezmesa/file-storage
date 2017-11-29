@@ -127,4 +127,14 @@ public class AbstractFileStorageServiceImplTest {
     Assert.assertNull(fileStorageService.get(fileId));
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public final void delete_with_null_fileid_throws_exception() throws IOException {
+    Assert.assertFalse(fileStorageService.delete(null));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public final void delete_with_blank_fileid_throws_exception() throws IOException {
+    Assert.assertFalse(fileStorageService.delete(" "));
+  }
+
 }

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang.StringUtils;
+
 import es.arcasi.oss.filestorage.model.FileMetadata;
 import es.arcasi.oss.filestorage.model.FileStorageItem;
 import net.jodah.expiringmap.ExpiringMap;
@@ -67,6 +69,11 @@ public class MemoryFileStorageServiceImpl extends AbstractFileStorageService {
 
   @Override
   public boolean delete(String fileId) {
+
+    if (StringUtils.isBlank(fileId)) {
+      throw new IllegalArgumentException("fileId cannot be blank");
+    }
+
     return mapCache.remove(fileId) != null;
   }
 
