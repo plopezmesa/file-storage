@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.SerializationUtils;
+import org.apache.commons.lang.StringUtils;
 
 import es.arcasi.oss.filestorage.model.FileMetadata;
 import es.arcasi.oss.filestorage.model.FileStorageItem;
@@ -36,7 +37,7 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
   public DiskFileStorageServiceImpl(String basePath) throws IOException {
     setBasePath(basePath);
   }
-  
+
   private void setBasePath(String basePath) throws IOException {
     if (basePath == null) {
       throw new IllegalArgumentException("BasePath cannot be null");
@@ -95,7 +96,8 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
     try {
       FileStorageItem fileStorageItem = new FileStorageItem(getFile(fileId), getFileMetadata(fileId));
       return fileStorageItem;
-    } catch (Exception e) {
+    }
+    catch (Exception e) {
       return null;
     }
   }
@@ -120,9 +122,14 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
 
     return fileMetadata;
   }
-  
+
   @Override
   public boolean delete(String fileId) {
+
+    if (StringUtils.isBlank(fileId)) {
+      throw new IllegalArgumentException("fileId cannot be blank");
+    }
+
     boolean deleted = FileUtils.deleteQuietly(getFilePath(fileId));
     FileUtils.deleteQuietly(getFileMetadataPath(fileId));
     return deleted;
