@@ -9,7 +9,3 @@ script:
 after_success:
   - mvn coveralls:report
 
-# whitelist
-branches:
-  only:
-    - master
