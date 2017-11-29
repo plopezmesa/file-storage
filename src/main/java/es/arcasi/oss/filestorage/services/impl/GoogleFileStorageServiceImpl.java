@@ -1,9 +1,15 @@
 package es.arcasi.oss.filestorage.services.impl;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
+import org.apache.commons.lang.StringUtils;
+
+import com.google.api.gax.paging.Page;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
@@ -34,6 +40,12 @@ public class GoogleFileStorageServiceImpl extends AbstractFileStorageService {
     if (bucketName == null) {
       throw new IllegalArgumentException("Bucket name cannot be null");
     }
+  }
+
+  @Override
+  public Collection<String> keys() throws IOException {
+    Page<Blob> page = storage.list(bucketName);
+    return StreamSupport.stream(page.iterateAll().spliterator(), false).map(blob -> blob.getName()).collect(Collectors.toSet());
   }
 
   @Override
@@ -91,6 +103,11 @@ public class GoogleFileStorageServiceImpl extends AbstractFileStorageService {
 
   @Override
   public boolean delete(String fileId) {
+
+    if (StringUtils.isBlank(fileId)) {
+      throw new IllegalArgumentException("fileId cannot be blank");
+    }
+
     BlobId blobId = BlobId.of(bucketName, fileId);
     boolean deleted = storage.delete(blobId);
     return deleted;
