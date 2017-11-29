@@ -1,6 +1,7 @@
 package es.arcasi.oss.filestorage.services.impl;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -39,6 +40,11 @@ public class MemoryFileStorageServiceImpl extends AbstractFileStorageService {
    */
   public MemoryFileStorageServiceImpl(long ttl) {
     mapCache = ExpiringMap.builder().expiration(ttl, TimeUnit.SECONDS).build();
+  }
+
+  @Override
+  public Collection<String> keys() throws IOException {
+    return mapCache.keySet();
   }
 
   @Override

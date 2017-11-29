@@ -2,7 +2,10 @@ package es.arcasi.oss.filestorage.services.impl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
@@ -37,6 +40,24 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
    */
   public DiskFileStorageServiceImpl(String basePath) throws IOException {
     setBasePath(basePath);
+  }
+
+  @Override
+  public Collection<String> keys() throws IOException {
+    File basePathDir = new File(basePath);
+
+    File[] files = basePathDir.listFiles(new FilenameFilter() {
+      public boolean accept(File dir, String name) {
+        return !name.endsWith(METADATA_FILE_EXT);
+      }
+    });
+
+    Collection<String> fileIds = new ArrayList<>(files.length);
+    for (File file : files) {
+      fileIds.add(file.getName());
+    }
+
+    return fileIds;
   }
 
   private void setBasePath(String basePath) throws IOException {

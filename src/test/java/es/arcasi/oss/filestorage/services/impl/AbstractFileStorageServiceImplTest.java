@@ -1,6 +1,10 @@
 package es.arcasi.oss.filestorage.services.impl;
 
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.junit.Assert.assertThat;
+
 import java.io.IOException;
+import java.util.Collection;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -35,6 +39,16 @@ public class AbstractFileStorageServiceImplTest {
 
   public AbstractFileStorageServiceImplTest(FileStorageService fileStorageService) {
     this.fileStorageService = fileStorageService;
+  }
+
+  @Test
+  public final void list_returns_collection_of_fileid_with_at_least_item_added() throws IOException {
+    FileStorageItem fileStorageItem = new FileStorageItem(fileData);
+    String fileId = fileStorageService.save(fileStorageItem);
+
+    Collection<String> fileIds = fileStorageService.keys();
+
+    assertThat(fileIds, hasItem(fileId));
   }
 
   @Test

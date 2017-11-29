@@ -1,6 +1,7 @@
 package es.arcasi.oss.filestorage.services;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import es.arcasi.oss.filestorage.model.FileMetadata;
 import es.arcasi.oss.filestorage.model.FileStorageItem;
@@ -17,6 +18,13 @@ public interface FileStorageService {
    * FileMetadata will be written with the same filename as the file but with this METADATA_FILE_EXT extension added
    */
   public static final String METADATA_FILE_EXT = ".fsm";
+
+  /**
+   * Lists all fileIds for {@link FileStorageItem}
+   * @return The Collection of fileIds found
+   * @throws IOException
+   */
+  public Collection<String> keys() throws IOException;
 
   /**
    * Stores (saves) the {@linkplain FileStorageItem} file
