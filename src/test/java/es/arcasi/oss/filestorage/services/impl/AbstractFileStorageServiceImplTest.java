@@ -133,6 +133,15 @@ public class AbstractFileStorageServiceImplTest {
   }
 
   @Test
+  public final void delete_existing_file_deletes_file_metadata() throws IOException {
+    String fileId = fileStorageService.save(new FileStorageItem(fileData, fileMetadata));
+
+    fileStorageService.delete(fileId);
+
+    Assert.assertNull(fileStorageService.getMetadata(fileId));
+  }
+
+  @Test
   public final void delete_existing_file_must_return_null_when_getting_it_again() throws IOException {
     String fileId = fileStorageService.save(new FileStorageItem(fileData));
 
