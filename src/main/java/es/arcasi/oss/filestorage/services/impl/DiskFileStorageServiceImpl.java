@@ -10,6 +10,8 @@ import java.util.Collection;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import es.arcasi.oss.filestorage.model.FileMetadata;
@@ -31,7 +33,7 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
   /**
    * Jackson JSON Serialization
    */
-  private ObjectMapper objectMapper = new ObjectMapper();
+  private ObjectMapper objectMapper;
 
   /**
    * Creates a new disk {@link FileStorageService} implementations
@@ -40,6 +42,7 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
    */
   public DiskFileStorageServiceImpl(String basePath) throws IOException {
     setBasePath(basePath);
+    this.objectMapper = getObjectMapper();
   }
 
   private void setBasePath(String basePath) throws IOException {
@@ -62,6 +65,13 @@ public class DiskFileStorageServiceImpl extends AbstractFileStorageService {
     }
 
     this.basePath = basePath;
+  }
+
+  private ObjectMapper getObjectMapper() {
+    ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.setVisibility(PropertyAccessor.ALL, Visibility.NONE);
+    objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
+    return objectMapper;
   }
 
   private File getFilePath(String fileId) {

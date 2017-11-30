@@ -3,6 +3,7 @@ package es.arcasi.oss.filestorage.services.impl;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
@@ -39,13 +40,36 @@ public class DiskFileStorageServiceImplTest extends AbstractFileStorageServiceIm
 
   @Test
   public final void save_file_write_file_to_disk() throws IOException {
-    FileStorageService fileStorageService = new DiskFileStorageServiceImpl(BASE_PATH);
-
     String fileId = fileStorageService.save(new FileStorageItem(fileData));
-    File fileRead = new File(BASE_PATH + File.separator + fileId);
+    final String FILE = BASE_PATH + File.separator + fileId;
+    File fileRead = new File(FILE);
 
     Assert.assertTrue(fileRead.exists());
     Assert.assertArrayEquals(fileData, FileUtils.readFileToByteArray(fileRead));
-    FileUtils.deleteQuietly(new File(BASE_PATH + File.separator + fileId));
+    FileUtils.deleteQuietly(fileRead);
   }
+
+  @Test
+  public final void save_file_write_file_metadata_to_disk() throws IOException {
+    String fileId = fileStorageService.save(new FileStorageItem(fileData, fileMetadata));
+    final String FILE = BASE_PATH + File.separator + fileId + FileStorageService.METADATA_FILE_EXT;
+    File fileRead = new File(FILE);
+
+    Assert.assertTrue(fileRead.exists());
+    Assert.assertTrue(FileUtils.readFileToString(fileRead, StandardCharsets.UTF_8).length() > 0);
+    FileUtils.deleteQuietly(fileRead);
+  }
+
+  @Test
+  public final void file_metadata_contains_serial_version_1() throws IOException {
+    String fileId = fileStorageService.save(new FileStorageItem(fileData, fileMetadata));
+    final String FILE = BASE_PATH + File.separator + fileId + FileStorageService.METADATA_FILE_EXT;
+    File fileRead = new File(FILE);
+
+    String metadataString = FileUtils.readFileToString(fileRead, StandardCharsets.UTF_8);
+
+    Assert.assertTrue(metadataString.contains("\"fsmVer\":1"));
+    FileUtils.deleteQuietly(fileRead);
+  }
+
 }

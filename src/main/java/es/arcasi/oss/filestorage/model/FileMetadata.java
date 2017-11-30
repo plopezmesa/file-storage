@@ -16,6 +16,7 @@ public class FileMetadata implements Serializable {
   private static final String FILESIZE_KEY = "_FILESIZE";
   private static final String CONTENT_TYPE_KEY = "_CONTENT_TYPE";
 
+  protected final long fsmVer = serialVersionUID;
   protected Map<String, String> metadata = new HashMap<>();
 
   public String getFileName() {
